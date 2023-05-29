@@ -1,4 +1,7 @@
 //code here
+
+coteraz = 'o';
+
 function generateTable(rzedy, kolumny) {
   if (document.getElementById('tabela1')) {
     alert('juz jest')
@@ -22,7 +25,12 @@ function generateTable(rzedy, kolumny) {
       // node the contents of the <td>, and put the <td> at
       // the end of the table row
       const cell = document.createElement("td");
-      const cellText = document.createTextNode(` ${i} ${j}`);
+      cell.style.width = '40px'
+      cell.style.height = '40px'
+      let nazwa = 'pole' + i.toString() + '_' + j.toString();
+      cell.setAttribute('id', nazwa);
+      cell.setAttribute('onClick', 'ruch(this)');
+      const cellText = document.createTextNode(``);
       cell.appendChild(cellText);
       row.appendChild(cell);
     }
@@ -37,9 +45,22 @@ function generateTable(rzedy, kolumny) {
   //
   const przycisk = document.createElement('button')
   przycisk.innerHTML='skasuj'
+  przycisk.setAttribute("onClick", "skasuj()");
   div.appendChild(przycisk)
   // appends <table> into <body>
   document.body.appendChild(div);
   // sets the border attribute of tbl to '2'
   tbl.setAttribute("border", "2");
+}
+
+
+function skasuj() {
+    const tabela = document.getElementById('tabela1');
+    tabela.parentNode.removeChild(tabela);
+}
+
+function ruch(elem) {
+    elem.innerHTML = coteraz;
+    if (coteraz === 'o') { coteraz = 'x'}
+    else if (coteraz === 'x') {coteraz = 'o'}
 }
